@@ -18,6 +18,7 @@
 steps:
 - name: 'docker'
   args: [ 'build', '-t', 'gcr.io/yougo-projects/custom-image', '.' ]
+  timeout: 1000s
 
 # By default, all built docker images will be lost once the build is complete.
 # Rather than writing a build step to push this image, you can simply list the
