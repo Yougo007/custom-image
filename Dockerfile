@@ -87,9 +87,8 @@ RUN set -ex \
     gcloud config set core/disable_usage_reporting true && \
     gcloud config set component_manager/disable_update_check true && \
     gcloud config set metrics/environment github_docker_image && \
-    gcloud --version
-RUN git config --system credential.'https://source.developers.google.com'.helper gcloud.sh
-VOLUME ["/root/.config"]
+    gcloud --version \
+
 # add build deps before removing fetch deps in case there's overlap
 	&& apk del --no-network .fetch-deps \
 	\
@@ -163,7 +162,8 @@ VOLUME ["/root/.config"]
 	&& apk del --no-network .build-deps \
 	\
 	&& python3 --version
-
+RUN git config --system credential.'https://source.developers.google.com'.helper gcloud.sh
+VOLUME ["/root/.config"]
 # make some useful symlinks that are expected to exist
 RUN cd /usr/local/bin \
 	&& ln -s idle3 idle \
